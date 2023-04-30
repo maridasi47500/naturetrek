@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Videos Nature Trek</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Note moyenne</th>
+      <th>Video</th>
+      <th colspan="3">Noter cette vidéo</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr>
+        <td><%=video.nbstars%>/5</td>
+        <td><video controls width=200 height=200 src="/photos/<%=video.filename%>" type="video/mov">
+  <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
+  Voici <a href="/photos/<%=video.filename%>">un lien pour télécharger la vidéo</a>.</p>
+</video>
+</td>
+<td><%=form_with model: video,url: stars_video_path(video.id) do |form|%>
+  <%=text_area_tag :comment,"", placeholder: "commentez ici"%>
+  <input type="image" alt="note" name="1" id="image1" src="/assets/mypic.png"/>
+  <input type="image" alt="note" name="2" id="image2" src="/assets/mypic.png"/>
+  <input type="image" alt="note" name="3" id="image3" src="/assets/mypic.png"/>
+  <input type="image" alt="note" name="4" id="image4" src="/assets/mypic.png"/>
+  <input type="image" alt="note" name="5" id="image5" src="/assets/mypic.png"/>
+
+<%end%>
+  </td>
+        <td><%= link_to 'Voir tous les commentaires', video %></td>
+        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Video', new_video_path %>

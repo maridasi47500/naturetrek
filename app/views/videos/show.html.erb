@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<video controls width=200 height=200 src="/photos/<%=@video.filename%>" type="video/mov">
+  <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
+  Voici <a href="/photos/<%=@video.filename%>">un lien pour télécharger la vidéo</a>.</p>
+</video>
+<%if @video.notes.length > 0%>
+  <p>notes sur cette vidéo :</p>
+  <ul>
+<%@video.notes.each do |n|%>
+  <li><%=n.note%>/5
+
+  <%if n.comment.length > 0%>
+    <%=n.comment%>
+  <%else%>
+    (pas de commentaire)
+    <%end%>
+
+  </li>
+  <%end%>
+  </ul>
+<%else%>
+  <p>aucune note sur cette vidéo</p>
+<%end%>
+
+<%= link_to 'Retour à toutes les vidéos', videos_path %>
